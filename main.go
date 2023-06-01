@@ -65,7 +65,7 @@ func generateConfig(config clientcmdapi.Config) {
 	}
 }
 
-func ReadKubeconfig() (*clientcmdapi.Config, error) {
+func readKubeconfig() (*clientcmdapi.Config, error) {
 	// Specify the path of the kubeconfig file to be loaded in clientcmd.ClientConfigLoadingRules.
 	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
 	loadingRules.ExplicitPath = "./config"
@@ -79,7 +79,7 @@ func ReadKubeconfig() (*clientcmdapi.Config, error) {
 }
 
 func main() {
-	config, err := ReadKubeconfig()
+	config, err := readKubeconfig()
 	if err != nil {
 		log.Fatalln(err)
 	}
