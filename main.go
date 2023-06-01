@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -54,7 +56,9 @@ func generateConfig(config clientcmdapi.Config) {
 
 		// Write the new kubeconfig file to a temporary location.
 		// The kubeconfig file will be named "kubeconfig0", "kubeconfig1", "kubeconfig2", etc.
-		if err := clientcmd.WriteToFile(*cmdConfig, fmt.Sprintf("/tmp/kubeconfig%d", fileIdx)); err != nil {
+		if err := clientcmd.WriteToFile(
+			*cmdConfig,
+			filepath.Join(os.TempDir(), fmt.Sprintf("kubeconfig%d", fileIdx))); err != nil {
 			log.Fatalln(err)
 		}
 		fileIdx++
