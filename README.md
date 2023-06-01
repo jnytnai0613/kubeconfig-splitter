@@ -10,4 +10,4 @@ Split files when there are multiple contexts in kubeconfig
   ./main
   ```
 4. A number of split kubeconfig files are created in the /tmp directory for the number of contexts.<br>
-   At that time, a file in the form of kubeconfigN is created in the primary directory of the OS.
+   At that time, a file in the form of kubeconfigN is created in the temp directory of the OS.
