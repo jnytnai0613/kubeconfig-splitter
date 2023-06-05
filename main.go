@@ -75,7 +75,7 @@ func ReadKubeconfig() (*clientcmdapi.Config, error) {
 }
 
 func main() {
-	config, err := ReadKubeconfig()
+	config, err := readKubeconfig()
 	if err != nil {
 		log.Fatalln(err)
 	}
