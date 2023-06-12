@@ -19,18 +19,15 @@ func generateConfig(config clientcmdapi.Config) {
 		clusterName := v.Cluster
 		authInfo := v.AuthInfo
 		contextName := k
-		cmdContext := &clientcmdapi.Context{
-			Cluster:  clusterName,
-			AuthInfo: authInfo,
-		}
-
-		// Get the cluster, authinfo, and endpoint data from the parent kubeconfig file.
 		apiEndpoint := string(config.Clusters[clusterName].Server)
 		authData := config.Clusters[clusterName].CertificateAuthorityData
 		certData := config.AuthInfos[authInfo].ClientCertificateData
 		keyData := config.AuthInfos[authInfo].ClientKeyData
 
-		// Create a new kubeconfig file with the cluster, authinfo, and endpoint data.
+		cmdContext := &clientcmdapi.Context{
+			Cluster:  clusterName,
+			AuthInfo: authInfo,
+		}
 		cmdCluser := &clientcmdapi.Cluster{
 			Server:                   apiEndpoint,
 			CertificateAuthorityData: authData,
@@ -65,7 +62,7 @@ func generateConfig(config clientcmdapi.Config) {
 	}
 }
 
-func ReadKubeconfig() (*clientcmdapi.Config, error) {
+func readKubeconfig() (*clientcmdapi.Config, error) {
 	kubeconfig, err := clientcmd.LoadFromFile("./config")
 	if err != nil {
 		return nil, err
